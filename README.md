@@ -193,7 +193,7 @@ Only perform this if this is the first time you will setup your Git Environment
       - In the same file (BankAccountDemo.java), outside the BankAccount class, create the main method.
       ```Java
       public class BankAccountDemo {
-          public static void main(String args) {
+          public static void main(String[] args) {
               // Code will go here
           }
       }

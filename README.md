@@ -1,7 +1,7 @@
-# **2025-OBJPROG-LAB022**
+# **2025-OBJPROG-LAB023**
 Week 05 - Methods in Java
 
-Laboratory # 22 - Week 05 - Guided Coding Exercise 1: Basic Class Creation and Object Instantiation
+Laboratory # 23 - Week 05 - Guided Coding Exercise 2: Using Access Modifiers, Methods, and Attributes
 
 ## **Instructions**
 
@@ -77,14 +77,14 @@ Only perform this if this is the first time you will setup your Git Environment
 
 ### **Step 3: Complete the Assignment**
 
-**Laboratory # 22 - Week 05 - Guided Coding Exercise 1: Basic Class Creation and Object Instantiation**
+**Laboratory # 23 - Week 05 - Guided Coding Exercise 2: Using Access Modifiers, Methods, and Attributes**
 
    **Objective:**
-   - Discuss the concepts of objects and classes.
-   - Create a simple class with attributes and methods, and instantiate an object.
+   - Understand and use access modifiers (public, private, protected).
+   - Define methods and attributes within a class.
 
    **File Naming Convention:**
-   - `CarDemo.java`
+   - `BankAccountDemo.java`
 
    **Desired Output:**
    ```txt
@@ -92,93 +92,141 @@ Only perform this if this is the first time you will setup your Git Environment
    ```
 
    **Notable Observations:**
-   - The Car class acts as a blueprint for creating Car objects.
-   - The myCar object is an instance of the Car class.
-   - The displayInfo method defines the behavior of the Car object.
+   - You can directly access the accountHolder and accountType because they have public and protected access respectively.
+   - You cannot directly access balance (private) from the main method.
+   - You need to use the public methods (deposit, withdraw, getBalance) to interact with the private balance.
 
    **Java Programming Best Practices:**
-   - Use meaningful class and variable names that clearly describe their purpose.
-   - Use comments to explain your code and the purpose of classes and methods.
-   - Follow Java naming conventions (e.g., class names start with an uppercase letter).
+   - Use private access for sensitive data to protect it from unintended modification.
+   - Provide public methods to allow controlled access to private attributes.
+   - Use protected access when you want to allow access within the same package and subclasses.
       
    **Step-by-Step Instructions:**
 
-   1. Create the Car Class
-      - Create a new Java file named `CarDemo.java`.
-      - Define a class called `Car`.
+   1. Create the BankAccount Class
+      - Create a new Java file named `BankAccountDemo.java`.
+      - Define a class called `BankAccount`.
       ```Java      
-      class Car {
+      class BankAccount {
           // Code will go here
       }
       ```
             
-   2. Add Attributes (Data Fields)
-      - Inside the Car class, declare three instance variables (attributes):
-         - make of type String
-         - model of type String
-         - year of type int
+   2. Add Attributes with Access Modifiers
+      - Inside the BankAccount class, declare three instance variables (attributes) with different access modifiers:
+         - accountHolder of type String with public access.
+         - balance of type double with private access.
+         - accountType of type String with protected access.
       ```Java
-      class Car {
-          String make;
-          String model;
-          int year;
+      class BankAccount {
+          public String accountHolder;
+          private double balance;
+          protected String accountType;
       }
       ```
 
-   3. Add a displayInfo Method
-      - Inside the Car class, create a method named displayInfo.
-      - This method should not return any value (void).
-      - Inside the displayInfo method, add a println statement to print the car's information in the format: "Car: [year] [make] [model]"
+   3. Create a Constructor
+      - Inside the BankAccount class, create a constructor.
+      - The constructor should take three parameters:
+         - a String for the accountHolder
+         - a double for the balance
+         - a String for the accountType
+      - Inside the constructor, initialize the accountHolder, balance, and accountType attributes using the provided parameters.
       ```Java
-      class Car {
+      class BankAccount {
           //... (attributes)...
       
-          public void displayInfo() {
-              System.out.println("Car: " + year + " " + make + " " + model);
+          public BankAccount(String accountHolder, double balance, String accountType) {
+              this.accountHolder = accountHolder;
+              this.balance = balance;
+              this.accountType = accountType;
           }
       }
       ```
 
-   4. Create the main Method
-      - In the same file (CarDemo.java), outside the Car class, create the main method. This is where your program will start running.
+   4. Add a deposit Method
+      - Inside the BankAccount class, create a method named deposit.
+      - This method should take a double parameter named amount.
+      - Add logic to increase the balance by the amount if the amount is positive.
       ```Java
-      public class CarDemo {
+      class BankAccount {
+          //... (attributes and constructor)...
+      
+          public void deposit(double amount) {
+              if (amount > 0) {
+                  balance += amount;
+              }
+          }
+      }
+      ```
+
+   5. Add a withdraw Method
+      - Inside the BankAccount class, create a method named withdraw.
+      - This method should take a double parameter named amount.
+      - Add logic to decrease the balance by the amount only if the amount is positive and less than or equal to the current balance.
+      ```Java
+      class BankAccount {
+          //... (other methods)...
+      
+          public void withdraw(double amount) {
+              if (amount > 0 && amount <= balance) {
+                  balance -= amount;
+              }
+          }
+      }
+      ```
+
+   6. Add a getBalance Method
+      - Inside the BankAccount class, create a method named getBalance.
+      - This method should return a double value representing the current balance.
+      ```Java
+      class BankAccount {
+          //... (other methods)...
+      
+          public double getBalance() {
+              return balance;
+          }
+      }
+      ```
+
+   7. Create the main Method
+      - In the same file (BankAccountDemo.java), outside the BankAccount class, create the main method.
+      ```Java
+      public class BankAccountDemo {
           public static void main(String args) {
               // Code will go here
           }
       }
       ```
 
-   5. Create a Car Object
-      - Inside the main method, create an object of the Car class named myCar. Use the new keyword to instantiate the object.
+   8. Create a BankAccount Object
+      - Inside the main method, create an object of the BankAccount class named myAccount. Use the constructor to initialize the accountHolder, balance, and accountType with appropriate values.
       ```Java
-      Car myCar = new Car();
+      BankAccount myAccount = new BankAccount("Alice", 1000.0, "Checking");
       ```
 
-   6. Assign Values to Attributes
-      - In the main method, assign values to the attributes of the myCar object:
-         - Set the make to "Toyota".
-         - Set the model to "Corolla".
-         - Set the year to 2020.
+   9. Access and Modify Account Details
+      - In the main method:
+         - Call the deposit method to deposit some amount into the account.
+         - Call the withdraw method to withdraw some amount.
+         - Print the accountHolder name using myAccount.accountHolder.
+         - Print the accountType using myAccount.accountType.
+         - Print the current balance using myAccount.getBalance().
       ```Java
-      myCar.make = "Toyota";
-      myCar.model = "Corolla";
-      myCar.year = 2020;
+      myAccount.deposit(250.0);
+      myAccount.withdraw(100.0);
+      System.out.println("Account Holder: " + myAccount.accountHolder);
+      System.out.println("Account Type: " + myAccount.accountType);
+      System.out.println("Current Balance: $" + myAccount.getBalance());
       ```
 
-   7. Call the displayInfo Method
-      - In the main method, call the displayInfo() method on the myCar object.
-      ```Java
-      myCar.displayInfo();
-      ```
-
-   8. Compile and Run
-       - Save the file as `CarDemo.java`.
-       - Compile the code using `javac CarDemo.java` in your terminal or command prompt.
-       - Run the compiled code using `java CarDemo`.
+   10. Compile and Run
+       - Save the file as `BankAccountDemo.java`.
+       - Compile the code using `javac BankAccountDemo.java` in your terminal or command prompt.
+       - Run the compiled code using `java BankAccountDemo`.
 
    **Conclusion**
-   This exercise introduced the fundamental concepts of classes and objects in Java. Classes are blueprints for creating objects, and objects are instances of classes. Classes define the attributes and behaviors of objects. By understanding these concepts, you can start building more complex and organized Java programs that model real-world entities and their interactions.
+   This exercise demonstrated the use of access modifiers in Java. Access modifiers control the visibility and accessibility of class members (attributes and methods). By using appropriate access modifiers, you can encapsulate data and protect it from unauthorized access, leading to more robust and maintainable code.
 
 ### **Step 4: Push Changes to GitHub**
 Once you've completed your changes, follow these steps to upload your work to your GitHub repository.
@@ -202,7 +250,7 @@ Once you've completed your changes, follow these steps to upload your work to yo
    Write a meaningful commit message:
    
    ```bash
-   git commit -m "Submitting OBJPROG Week 05 - Laboratory # 22"
+   git commit -m "Submitting OBJPROG Week 05 - Laboratory # 23"
    ```
    
 4. Push your changes to GitHub:

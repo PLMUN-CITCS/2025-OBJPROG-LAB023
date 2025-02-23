@@ -88,7 +88,9 @@ Only perform this if this is the first time you will setup your Git Environment
 
    **Desired Output:**
    ```txt
-   //Modify this
+   Account Holder: Alice
+   Account Type: Checking
+   Current Balance: $1150.0
    ```
 
    **Notable Observations:**
